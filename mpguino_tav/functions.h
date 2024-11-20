@@ -942,6 +942,51 @@ static const uint8_t prgmPressureChannel[] PROGMEM = {
 	instrDone											// exit to caller
 };
 
+static const uint8_t prgmCalculateMAPpressure[] PROGMEM = {
+	instrLdRegVoltage, 0x02, analogMAPchannelIdx,		// load analog channel ADC step value
+	instrSubMainFromX, 0x02, mpAnalogMAPfloorIdx,		// is reading below MAP sensor voltage floor?
+	instrBranchIfLT, 3,									// if not, continue
+	instrLdRegByte, 0x02, 0,							// zero out result in register 2
+
+//cont1:
+	instrMul2byMain, mpAnalogMAPnumerIdx,				// perform conversion to get pressure units per volts value
+	instrDiv2byMain, mpAnalogMAPdenomIdx,				// divide by pressure units per volts value
+	instrAddEEPROMtoX, 0x02, pMAPsensorOffsetIdx,		// add pressure offset value from EEPROM
+	instrStRegMain, 0x02, mpMAPpressureIdx,				// store resulting MAP sensor reading
+#if defined(useChryslerBaroSensor)
+	instrDone											// exit to caller
+};
+
+static const uint8_t prgmCalculateBaroPressure[] PROGMEM = {
+	instrLdRegVoltage, 0x02, analogBaroChannelIdx,		// load analog channel ADC step value
+	instrSubMainFromX, 0x02, mpAnalogBaroFloorIdx,		// is reading below barometric sensor voltage floor?
+	instrBranchIfLT, 3,									// if not, continue
+	instrLdRegByte, 0x02, 0,							// zero out result in register 2
+
+//cont1:
+	instrMul2byMain, mpAnalogBaroNumerIdx,				// convert to obtain pressure units per volts value
+	instrDiv2byMain, mpAnalogBaroDenomIdx,				// divide by pressure units per volts value
+	instrAddEEPROMtoX, 0x02, pBaroSensorOffsetIdx,		// add pressure offset value from EEPROM
+	instrStRegMain, 0x02, mpBaroPressureIdx,			// store resulting barometric sensor reading
+#endif // defined(useChryslerBaroSensor)
+	instrLdRegMain, 0x02, mpFuelPressureIdx,			// get fuel system differential pressure
+	instrAddMainToX, 0x02, mpBaroPressureIdx,			// add to reference barometric pressure to get fuel system absolute pressure
+	instrSubMainFromX, 0x02, mpMAPpressureIdx,			// subtract MAP to get differential pressure across the fuel injector
+	instrStRegMain, 0x02, mpInjPressureIdx,				// store differential pressure across the fuel injector
+	instrMul2byConst, idxCorrectionFactor2,				// set up for iSqrt
+	instrDiv2byMain, mpFuelPressureIdx,					// divide by the fuel system differential pressure
+	instrTestReg, 0x02,									// test whether overflow occurred
+	instrBranchIfOverflow, 6,							// if overflow occurred, go handle it
+	instrIsqrt, 0x02,									// perform square root on result
+	instrStRegVolatile, 0x02, vInjectorCorrectionIdx,	// save square root of presssure differential ratio as fuel injector correction factor
+	instrDone,											// return to caller
+
+//cont3:
+	instrLdRegConst, 0x02, idxCorrectionFactor,
+	instrStRegVolatile, 0x02, vInjectorCorrectionIdx,	// save initial injector correction index for pressure differential calculation
+	instrDone											// return to caller
+};
+
 #endif // defined(useChryslerMAPCorrection)
 #if defined(useDragRaceFunction)
 static const uint8_t prgmDragSpeed[] PROGMEM = {		// tDragSpeed - acceleration test maximum vehicle speed (SI/SAE)

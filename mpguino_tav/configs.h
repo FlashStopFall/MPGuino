@@ -15,7 +15,7 @@
 //   - useJSONoutput outputs selected trip functions as a JSON array of JSON objects
 //   - useDebugTerminal provides for a PC-MPGuino debugging environment to test various basic MPGuino functions
 //
-//#define useDataLoggingOutput true			// output 5 basic trip functions to a data logger or SD card, once every refresh period (0.5 second)
+#define useDataLoggingOutput true			// output 5 basic trip functions to a data logger or SD card, once every refresh period (0.5 second)
 //#define useJSONoutput true					// skybolt added to enable and call JSON out routine
 //#define useDebugTerminal true				// debugging terminal interface between PC and MPGuino
 //#define useBluetooth true					// bluetooth interface with Android phone
@@ -24,7 +24,7 @@
 //   - if useDataLoggingOutput is not selected, the below output port options will be ignored
 //   - if useDataLoggingOutput is selected, choose only one of the below output port options, or an error will result
 //
-//#define useLoggingSerialPort0 true			// select logging output on serial port channel 0 (most Arduino boards, excluding TinkerKit! LCD module)
+#define useLoggingSerialPort0 true			// select logging output on serial port channel 0 (most Arduino boards, excluding TinkerKit! LCD module)
 //#define useLoggingSerialPort1 true			// select logging output on serial port channel 1 (ATmega2560 board, Atmega32U4 board excluding TinkerKit! LCD module)
 //#define useLoggingSerialPort2 true			// select logging output on serial port channel 2 (ATmega2560 board)
 //#define useLoggingSerialPort3 true			// select logging output on serial port channel 3 (ATmega2560 board)
@@ -74,7 +74,7 @@
 //
 // if either useTinkerkitLCDmodule or useMPGuinoColourTouch is used, the below options will be ignored
 //
-//#define useLegacyLCD true					// select Legacy 16x2 4-bit LCD
+#define useLegacyLCD true					// select Legacy 16x2 4-bit LCD
 //#define useDFR0009LCD true						// (inw) select DFRobot DFR0009 LCD Keypad Shield
 //#define useAdafruitRGBLCDshield true		// select Adafruit RGB 16x2 4-bit LCD module over TWI
 //#define useParallaxSerialLCDmodule true		// select Parallax 16x2 Serial LCD module
@@ -103,7 +103,7 @@
 // note: if useAdafruitRGBLCDshield is selected, useLegacyButtons will be ignored
 //       if useMPGuinoColourTouch is selected, all hardware button choices will be ignored
 //
-//#define useLegacyButtons true
+#define useLegacyButtons true
 //#define useAnalogMuxButtons true
 //#define useParallax5PositionSwitch true
 
@@ -112,21 +112,21 @@
 #define trackIdleEOCdata true				// Ability to track engine idling and EOC modes
 #define useSavedTrips true					// Ability to save current or tank trips to EEPROM
 #define usePartialRefuel true				// Provide means to enter partial refuel amount into MPGuino
-//#define useFuelCost true					// Show fuel cost
-//#define useDragRaceFunction true			// Performs "drag race" 0-60 MPH, 1/4 mile time, estimated horsepower functionality
-//#define useBigFE true						// Show big fuel economy displays
-//#define useBigDTE true						// Show big distance-to-empty displays
-//#define useBigTTE true						// Show big time-to-empty displays
-//#define useBarFuelEconVsTime true			// Show Fuel Economy over Time bar graph
-//#define useBarFuelEconVsSpeed true			// Show Fuel Economy vs Speed, Fuel Used vs Speed bar graphs
-//#define useStatusMeter true					// displays a graphical meter for use with MPG display
-//#define useSpiffyTripLabels true			// Ability to use enhanced trip labels on main display screens
+#define useFuelCost true					// Show fuel cost
+#define useDragRaceFunction true			// Performs "drag race" 0-60 MPH, 1/4 mile time, estimated horsepower functionality
+#define useBigFE true						// Show big fuel economy displays
+#define useBigDTE true						// Show big distance-to-empty displays
+#define useBigTTE true						// Show big time-to-empty displays
+#define useBarFuelEconVsTime true			// Show Fuel Economy over Time bar graph
+#define useBarFuelEconVsSpeed true			// Show Fuel Economy vs Speed, Fuel Used vs Speed bar graphs
+#define useStatusMeter true					// displays a graphical meter for use with MPG display
+#define useSpiffyTripLabels true			// Ability to use enhanced trip labels on main display screens
 #define useSpiffyBigChars true				// Provides better number font with use with big number displays above
-//#define useScreenEditor true				// Ability to change any of (9 or 12, depending on configuration) existing trip data screens, with 4 configurable figures on each screen
-//#define useSoftwareClock true				// Shows 24 hour clock driven off of timer0, and provides a means to set it
+#define useScreenEditor true				// Ability to change any of (9 or 12, depending on configuration) existing trip data screens, with 4 configurable figures on each screen
+#define useSoftwareClock true				// Shows 24 hour clock driven off of timer0, and provides a means to set it
 //#define useCPUreading true					// Show CPU loading and available RAM usage
-//#define useChryslerMAPCorrection true		// Ability to perform on-the-fly fuel injector data correction for late-model Chrysler vehicles
-//#define useChryslerBaroSensor true			// allows use of a separate MAP sensor wired to MPGuino to read barometric pressure, for even more accurate correction
+#define useChryslerMAPCorrection true		// Ability to perform on-the-fly fuel injector data correction for late-model Chrysler vehicles
+#define useChryslerBaroSensor true			// allows use of a separate MAP sensor wired to MPGuino to read barometric pressure, for even more accurate correction
 //#define useOutputPins true					// Generate analog 0-5VDC output voltage on expansion pins to drive LEDs or feed signal to external gauges
 //#define blankScreenOnMessage true			// Completely blank display screen upon display of status message
 //#define useImperialGallon true				// when selected, uses Imperial gallons instead of default US gallons

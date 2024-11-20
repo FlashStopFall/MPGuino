@@ -434,13 +434,6 @@ static const char pressureCorrectDisplayTitles[] PROGMEM = {
 	"Pressures" tcEOS
 };
 
-static const uint16_t pressureCorrectPageFormats[4] PROGMEM = {
-	 ((mpMAPpressureIdx - mpMAPpressureIdx) << 8 ) |	(tPressureChannel)		// Pressures
-	,((mpBaroPressureIdx - mpMAPpressureIdx) << 8 ) |	(tPressureChannel)
-	,((mpFuelPressureIdx - mpMAPpressureIdx) << 8 ) |	(tPressureChannel)
-	,((mpInjPressureIdx - mpMAPpressureIdx) << 8 ) |	(tPressureChannel)
-};
-
 #endif // defined(useChryslerMAPCorrection)
 #if defined(useEnhancedTripReset)
 namespace tripSave /* Trip save/restore/reset display support section prototype */
